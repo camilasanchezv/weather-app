@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import './App.css';
+import unknown from "./assets/unknown.png"
 
 const api = {
   key: "de1b7bd57bea6728e0a9536657e5826e",
@@ -57,22 +58,44 @@ function App() {
               <div className="location">{weather.name}, {weather.sys.country}</div>
               <div className="date">{dateBuilder(new Date())}</div>
             </div>
-            <div className="week-container">
-              <div className="day-box">
-                <div className="weather-box">
-                  <div className="temp">
-                    {Math.round(weather.main.temp)}ºC
-              </div>
-                  <div className="weather">
-                    {weather.weather[0].main}
+
+            <div className="day-box">
+              <div className="weather-box">
+                <div className="icon">
+                  <img src={`https://openweathermap.org/img/wn/${weather.weather[0].icon}@4x.png`}></img>
+                </div>
+                <div className="temp">
+                  {Math.round(weather.main.temp)}ºC
                   </div>
+                <div className="weather">
+                  {weather.weather[0].description}
                 </div>
               </div>
+
+              <div className="moreinfo-box">
+                <div className="min-max">
+                  <h1 className="more-info">
+                    {Math.round(weather.main.temp_max)}ºC
+                        <a>max</a>
+                  </h1>
+                  <h1 className="more-info">
+                    {Math.round(weather.main.temp_min)}ºC
+                        <a>min</a>
+                  </h1>
+                </div>
+                <h1 className="more-info">
+                  <a>Feels Like:</a> {Math.round(weather.main.feels_like)}ºC
+                  </h1>
+                <h1 className="more-info">
+                  <a>Humidity:</a> {Math.round(weather.main.humidity)}%
+                  </h1>
+              </div>
+
             </div>
           </div>
         ) : ("")}
       </main>
-    </div>
+    </div >
   );
 }
 
